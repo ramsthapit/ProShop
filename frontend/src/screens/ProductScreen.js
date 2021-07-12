@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Row, Col, Image, ListGroup, Card, Button, Container } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import products from '../products'
 
@@ -59,8 +59,7 @@ const ProductScreen = ({match}) => {
               </Button>
             </ListGroup.Item>
           </ListGroup>
-        </Card>
-        
+        </Card>  
       </Col>
     </Row>
   </>
