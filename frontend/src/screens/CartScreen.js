@@ -24,6 +24,7 @@ const CartScreen = ({match, location, history}) => {
   }, [dispatch, productId, qty])
   
   const removeFromCartHandler = (id) => {
+    console.log("ram");
     dispatch(removeFromCart(id))
   }
 
@@ -68,7 +69,7 @@ const CartScreen = ({match, location, history}) => {
                     </Form.Control>
                   </Col>
                   <Col md={2}>
-                    <Button type='button' variant='light' onCLick={() => removeFromCartHandler(item.product)}>
+                    <Button type='button' variant='light' onClick={() => removeFromCartHandler(item.product)}>
                       <i className='fas fa-trash'></i>
                     </Button>
                   </Col>
