@@ -12,19 +12,18 @@ const CartScreen = ({match, location, history}) => {
   const qty = location.search ? Number(location.search.split('=')[1]) : 1
 
   const dispatch = useDispatch()
-  const cart = useSelector(state => state.cart)
+  const cart = useSelector((state) => state.cart)
   const {cartItems} = cart
 
 
 
   useEffect(() => {
     if (productId) {
-      dispatch(addToCart(productId,qty))
+      dispatch(addToCart(productId, qty))
     }
   }, [dispatch, productId, qty])
   
   const removeFromCartHandler = (id) => {
-    console.log("ram");
     dispatch(removeFromCart(id))
   }
 
@@ -52,7 +51,7 @@ const CartScreen = ({match, location, history}) => {
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                   </Col>
                   <Col md={2}>
-                    {item.price}
+                    ${item.price}
                   </Col>
                   <Col md={2}>
                     <Form.Control
@@ -91,13 +90,14 @@ const CartScreen = ({match, location, history}) => {
                 .toFixed(2)}
             </ListGroup.Item>
             <ListGroup.Item>
-              <Button type='button'
+              <Button
+                type='button'
                 className='btn-block'
                 disabled={cartItems.length === 0}
                 onClick={checkoutHandler}
               >
-                  Proceed to checkout
-                </Button>
+                Proceed to checkout
+              </Button>
             </ListGroup.Item>
           </ListGroup>
         </Card>
