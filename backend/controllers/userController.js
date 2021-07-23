@@ -111,4 +111,4 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 })
 
-export { authUser ,registerUser, getUserProfile, updatedUser}
+export { authUser ,registerUser, getUserProfile, updateUserProfile}
