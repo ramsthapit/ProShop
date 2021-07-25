@@ -1,0 +1,32 @@
+[33m6c89eaf[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m orderController & Route
+[33ma7443c4[m[33m ([m[1;31morigin/master[m[33m)[m placeOrderScreen
+[33m643ffb9[m payment Screen
+[33m785c821[m Checkout steps
+[33m929fd07[m shipping Screen
+[33mfec1e92[m update User profile
+[33m51ab22f[m update profile
+[33m5c96f52[m register screen, action, reducer
+[33m5818683[m user navbar & logout
+[33m9465900[m user login screen
+[33maaeb3f3[m userReducer & Action
+[33m5f5d091[m backend user auth
+[33m09e224a[m user auth
+[33m1041f58[m add controller
+[33me22bcc3[m cart screen
+[33m215886f[m productDEtails Reducer & Action
+[33m3d4cf11[m redux on home screen
+[33m528ab1d[m productlist Reducer & Action
+[33mb6345b0[m fetching products
+[33mea3f286[m Data seeder script
+[33m4dc026f[m create schema
+[33m48d057d[m mongoDB setup
+[33mbd0080b[m ES Modules
+[33m92bb707[m enviroment Variables dotenv
+[33m9cec5db[m nodemon & concurrently
+[33m38d0371[m useEffect
+[33m29a313c[m backend route
+[33m7bf2969[m Product Screen
+[33m0efd804[m rating
+[33m7c44e76[m HomeScreen Product Listing
+[33m5d8a180[m React-Bootstrap Setup footer & header
+[33m40dcdcc[m react Setup
