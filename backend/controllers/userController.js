@@ -60,8 +60,8 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc    Get user & get token
-// @routes GET /api/users/login
+// @desc    Get user profile
+// @routes GET /api/users/profile
 // @access private 
 const getUserProfile = asyncHandler(async (req, res) => {
   
