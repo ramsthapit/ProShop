@@ -8,11 +8,11 @@ export const login = (email, password) => async (dispatch) => {
     })
     const config ={
       headers: {
-        'content-Type':'application/json'
+        'Content-Type':'application/json'
       }
     }
     const { data } = await axios.post(
-      'api/users/login', { email, password }, config)
+      '/api/users/login', { email, password }, config)
     
     dispatch({
       type: USER_LOGIN_SUCCESS,
@@ -43,11 +43,11 @@ export const register = ( name, email, password) => async (dispatch) => {
     })
     const config ={
       headers: {
-        'content-Type':'application/json'
+        'Content-Type':'application/json'
       }
     }
     const { data } = await axios.post(
-      'api/users', {name, email, password }, config)
+      '/api/users', {name, email, password }, config)
     
     dispatch({
       type: USER_REGISTER_SUCCESS,
@@ -80,11 +80,11 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 
     const config ={
       headers: {
-        Authorization:  `Bearer ${userInfo.token}`
+        Authorization: `Bearer ${userInfo.token}`
       }
     }
     const { data } = await axios.get(
-      `api/users/${id}`, config)
+      `/api/users/${id}`, config)
     
     dispatch({
       type: USER_DETAILS_SUCCESS,
@@ -117,14 +117,14 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 
     const { userLogin: { userInfo }} = getState()
 
-    const config ={
+    const config = {
       header: {
-        'content-Type': 'application/json',
-        Authorization:  `Bearer ${userInfo.token}`
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`
       }
     }
     const { data } = await axios.put(
-      `api/users/profile`,user, config)
+      `/api/users/profile`,user, config)
     
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,

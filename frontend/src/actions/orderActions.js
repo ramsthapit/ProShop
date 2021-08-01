@@ -13,12 +13,12 @@ export const createOrder = (order) => async (dispatch, getState) => {
 
     const config ={
       header: {
-        'content-Type': 'application/json',
+        'Content-Type': 'application/json',
         Authorization:  `Bearer ${userInfo.token}`
       }
     }
     const { data } = await axios.post(
-      `api/orders`,order, config)
+      `/api/orders`,order, config)
     
     dispatch({
       type: ORDER_CREATE_SUCCESS,
@@ -48,7 +48,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
         Authorization:  `Bearer ${userInfo.token}`
       }
     }
-    const { data } = await axios.get(`api/orders/${id}`, config)
+    const { data } = await axios.get(`/api/orders/${id}`, config)
     
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
@@ -79,7 +79,7 @@ export const  payOrder = (orderId, paymentResult) => async (dispatch, getState) 
         Authorization:  `Bearer ${userInfo.token}`
       }
     }
-    const { data } = await axios.geputt(`api/orders/${orderId}/pay`,paymentResult, config)
+    const { data } = await axios.put(`/api/orders/${orderId}/pay`,paymentResult, config)
     
     dispatch({
       type: ORDER_PAY_SUCCESS,
