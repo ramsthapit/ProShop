@@ -14,7 +14,7 @@ const OrderScreen = ({ match }) => {
 
   const orderId = match.params.id
 
-  const [sdkReady, setSdkReady] = useState(false)
+  const [sdkReady, setSdkReady] = useState('false')
 
   const dispatch = useDispatch()
   
@@ -65,7 +65,7 @@ const OrderScreen = ({ match }) => {
   
   
   const successPaymentHandler = (paymentResult) => {
-    console.log(paymentResult)
+    // console.log(paymentResult)
     dispatch(payOrder(orderId, paymentResult))
   }
 
@@ -166,7 +166,7 @@ const OrderScreen = ({ match }) => {
                     <PayPalButton
                       amount={order.totalPrice}
                       onSuccess={successPaymentHandler}
-                
+
                     />
                   )}
                 </ListGroup.Item>
