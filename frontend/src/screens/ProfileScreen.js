@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Row, Table } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { listMyOrders } from '../actions/orderActions'
+import { LinkContainer } from 'react-router-bootstrap'
 
 const ProfileScreen = ({location, history}) => {
 
@@ -33,7 +33,7 @@ const ProfileScreen = ({location, history}) => {
     if (!userInfo) {
       history.push('/login')
     } else {
-      if (!user || !user.name) {
+      if (!user.name) {
         dispatch(getUserDetails('profile'))
         dispatch(listMyOrders())
       } else {
@@ -57,7 +57,7 @@ const ProfileScreen = ({location, history}) => {
       <h1>User Profile</h1>
       {message && <Message variant='danger'>{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}
-      {success && <Message variant='danger'>Profile Updated</Message>}
+      {success && <Message variant='success'>Profile Updated</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         
@@ -121,8 +121,8 @@ const ProfileScreen = ({location, history}) => {
                 <th></th>
               </tr>
             </thead>
-            {/* <tbody>
-              {orders.map(order => (
+            <tbody>
+              {/* {orders.map(order => (
                 <tr key={order._id}>
                   <td>{order._id}</td>
                   <td>{order._createdAt.substring(0, 10)}</td>
@@ -139,8 +139,8 @@ const ProfileScreen = ({location, history}) => {
                     </LinkContainer>
                   </td>
                 </tr>
-              ))}
-            </tbody> */}
+              ))} */}
+            </tbody>
           </Table>
         )
       }
