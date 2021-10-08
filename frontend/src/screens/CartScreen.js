@@ -38,7 +38,7 @@ const CartScreen = ({match, location, history}) => {
         {cartItems.length === 0 ?
           <Message>
             Your cart is empty
-            <Link to='/'>Go Back</Link>
+            <Link to='/'> Go Back</Link>
           </Message> :
           (<ListGroup variant='flush'>
             {cartItems.map(item => (
