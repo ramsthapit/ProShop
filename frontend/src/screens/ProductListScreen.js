@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listProducts, deleteProduct, createProduct } from '../actions/productAction'
+import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 
 const ProductListScreen = ({ history, match }) => {
   const dispatch = useDispatch()
@@ -22,7 +23,8 @@ const ProductListScreen = ({ history, match }) => {
   const { userInfo } = userLogin
 
   useEffect(() => {
-    
+  dispatch({ type: PRODUCT_CREATE_RESET })
+
   if (!userInfo.isAdmin) {
     history.push('/login')
   }
