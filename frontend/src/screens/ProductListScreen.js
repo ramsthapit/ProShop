@@ -23,17 +23,16 @@ const ProductListScreen = ({ history, match }) => {
   const { userInfo } = userLogin
 
   useEffect(() => {
-    dispatch({ type: PRODUCT_CREATE_RESET })
     
-    if (!userInfo.isAdmin) {
-      history.push('/login')
-    }
+  if (!userInfo.isAdmin) {
+    history.push('/login')
+  }
 
-    if (successCreate) {
-      history.push(`product/${createdProduct._id}/edit`)
-    } else {
-      dispatch(listProducts())
-    }
+  if (successCreate) {
+    history.push(`product/${createdProduct._id}/edit`)
+  } else {
+    dispatch(listProducts())
+  }
   }, [dispatch, userInfo, history, successDelete, successCreate, createdProduct ])
 
   const deleteHandler = (id) => {
