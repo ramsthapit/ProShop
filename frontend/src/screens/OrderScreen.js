@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { PayPalButton } from 'react-paypal-button-v2'
-import { Col, Image, ListGroup, Row, Card } from 'react-bootstrap'
+import { Col, Image, ListGroup, Row, Card, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { Link } from 'react-router-dom'
-import { getOrderDetails, payOrder } from '../actions/orderActions'
-import { ORDER_PAY_RESET } from '../constants/orderConstants'
+import { deliverOrder, getOrderDetails, payOrder } from '../actions/orderActions'
+import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from '../constants/orderConstants'
 
 
 const OrderScreen = ({ match }) => {
@@ -23,6 +23,12 @@ const OrderScreen = ({ match }) => {
 
   const orderPay = useSelector(state => state.orderPay)
   const { loading:loadingPay, success: successPay } = orderPay
+
+  const orderDeliver = useSelector(state => state.orderDeliver)
+  const { loading:loadingDeliver, success: successDeliver } = orderDeliver
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
 
   if (!loading) {
     const addDecimals = (num) => {
@@ -49,8 +55,9 @@ const OrderScreen = ({ match }) => {
       document.body.appendChild(script)
     }
 
-    if (!order || successPay) {
+    if (!order || successPay || successDeliver) {
       dispatch({ type: ORDER_PAY_RESET })
+      dispatch({ type: ORDER_DELIVER_RESET })
       dispatch(getOrderDetails(orderId))
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -61,7 +68,7 @@ const OrderScreen = ({ match }) => {
       
     }
     
-  }, [dispatch, orderId,successPay, order])
+  }, [dispatch, orderId,successPay, order, successDeliver])
   
   
   const successPaymentHandler = (paymentResult) => {
@@ -69,6 +76,9 @@ const OrderScreen = ({ match }) => {
     dispatch(payOrder(orderId, paymentResult))
   }
 
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order))
+  }
   return loading ? <Loader /> : error ?
     <Message variant='danger'>{error}</Message> :
     <>
@@ -89,8 +99,8 @@ const OrderScreen = ({ match }) => {
                 {order.shippingAddress.address}, {' '} {order.shippingAddress.city},{' '}
                 {order.shippingAddress.postalCode},{' '}{order.shippingAddress.country},
               </p>
-              {order.isDeliverd ? <Message variant='success'>Deliverd on{order.deliverdAt}</Message>
-                : <Message variant='danger'> Not Deliverd</Message>}
+              {order.isDelivered ? <Message variant='success'>Delivered on{order.deliveredAt}</Message>
+                : <Message variant='danger'> Not Delivered</Message>}
               
             </ListGroup.Item>
             <ListGroup.Item>
@@ -159,7 +169,7 @@ const OrderScreen = ({ match }) => {
                   <Col>${order.totalPrice} </Col>
                 </Row>
               </ListGroup.Item>
-              {!order.ispaid && (
+              {!order.isPaid && (
                 <ListGroup.Item>
                   {loadingPay && <Loader />}
                   {!sdkReady ? <Loader /> : (
@@ -169,6 +179,14 @@ const OrderScreen = ({ match }) => {
 
                     />
                   )}
+                </ListGroup.Item>
+              )}
+              {loadingDeliver && <Loader />}
+              {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                <ListGroup.Item>
+                  <Button type='button' className='btn btn-block' onClick={deliverHandler}>
+                    Mark as Delivered
+                  </Button>
                 </ListGroup.Item>
               )}
             </ListGroup>    
