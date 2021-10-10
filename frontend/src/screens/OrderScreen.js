@@ -10,7 +10,7 @@ import { deliverOrder, getOrderDetails, payOrder } from '../actions/orderActions
 import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from '../constants/orderConstants'
 
 
-const OrderScreen = ({ match }) => {
+const OrderScreen = ({ match, history }) => {
 
   const orderId = match.params.id
 
@@ -43,6 +43,11 @@ const OrderScreen = ({ match }) => {
   
 
   useEffect(() => {
+
+    if (!userInfo) {
+      history.push('/login')
+    }
+
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get('/api/config/paypal')
       const script = document.createElement('script')
@@ -68,7 +73,7 @@ const OrderScreen = ({ match }) => {
       
     }
     
-  }, [dispatch, orderId,successPay, order, successDeliver])
+  }, [dispatch, orderId,successPay, order, successDeliver, userInfo, history])
   
   
   const successPaymentHandler = (paymentResult) => {
